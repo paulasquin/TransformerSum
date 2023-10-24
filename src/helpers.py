@@ -14,6 +14,7 @@ import torch.nn.functional as F
 import torch_optimizer
 from torch import nn
 from torch.utils.data import Sampler
+from lightning.pytorch.callbacks import Callback
 
 logger = logging.getLogger(__name__)
 
@@ -48,7 +49,7 @@ def load_json(json_file):
     return documents, file_path
 
 
-class StepCheckpointCallback(pl.callbacks.base.Callback):
+class StepCheckpointCallback(Callback):
     def __init__(
         self, step_interval=1000, save_name="model", save_path=".", num_saves_to_keep=5
     ):
